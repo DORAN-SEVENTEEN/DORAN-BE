@@ -1,9 +1,11 @@
 package com.seventeen.doran.service;
 
-import com.seventeen.doran.dto.DiaryDto;
+import com.seventeen.doran.dto.ContentsDto;
+import com.seventeen.doran.dto.ContentsResultDto;
+import com.seventeen.doran.dto.DiaryUpdateDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.repository.DiaryRepository;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +23,38 @@ public class DiaryService {
 
   private final DiaryRepository diaryRepository;
 
-  public void createDiary(LocalDateTime date, String text, String iconUrl) {
+  public void createIcon(DiaryUpdateDto diaryUpdateDto) {
+    Diary diary = diaryRepository.save(diaryUpdateDto.toEntity());
+  }
+
+  //기존 아이콘에 일기 추가
+  public void updateContents(@PathVariable Long id, @RequestBody ContentsDto contentsDto) {
+    Optional<Diary> diary = diaryRepository.findById(id);
+    if(diary.isPresent()) {
+      diary.get().setContents(contentsDto.getContents());
+      diaryRepository.save(diary.get());
+    }
+  }
+
+  //기존 아이콘에 일기 + 결과 추가
+  public void updateContentsResult(@PathVariable Long id, @RequestBody ContentsResultDto contentsResultDto) {
+    Optional<Diary> diary = diaryRepository.findById(id);
+    if(diary.isPresent()) {
+      diary.get().setContents(contentsResultDto.getContents());
+      diaryRepository.save(diary.get());
+    }
+  }
+
+
+  public void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryDto) {
+
+    Optional<Diary> diary = diaryRepository.findById(id);
+    if(diary.isPresent()) {
+      diary.get().setDate(diaryDto.getDate());
+      diary.get().setContents(diaryDto.getContents());
+      diary.get().setIconUrl(diaryDto.getIconUrl());
+      diaryRepository.save(diary.get());
+    }
   }
 
   @Transactional
@@ -31,18 +64,6 @@ public class DiaryService {
   @Transactional
   public List<Diary> readDiariesMonth(LocalDateTime startDate, LocalDateTime endDate) {
     return diaryRepository.findAllByDateBetween(startDate, endDate);
-  }
-
-
-  public void updateDiary(@PathVariable Long id, @RequestBody DiaryDto diaryDto) {
-
-    Optional<Diary> diary = diaryRepository.findById(id);
-    if(diary.isPresent()) {
-      diary.get().setDate(diaryDto.getDate());
-      diary.get().setContents(diaryDto.getContents());
-      diary.get().setIconUrl(diaryDto.getIconUrl());
-      diaryRepository.save(diary.get());
-    }
   }
   public void deleteDiary(Long id) {
 

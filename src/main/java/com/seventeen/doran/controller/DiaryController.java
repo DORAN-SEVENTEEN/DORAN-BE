@@ -1,5 +1,6 @@
 package com.seventeen.doran.controller;
 
+import com.seventeen.doran.dto.DiaryDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.service.DiaryService;
 import io.swagger.annotations.ApiOperation;
@@ -48,15 +49,15 @@ public class DiaryController {
 
   @ApiOperation(value="선택한 일기의 내용을 변경", notes = "세부 설명")
   @PutMapping("/update/diary/{id}")
-  void updateDiary(@PathVariable Long id) {
+  void updateDiary(@PathVariable Long id, @RequestBody DiaryDto diaryDto) {
 
-    diaryService.updateDiary(id);
+    diaryService.updateDiary(id, diaryDto);
   }
 
   @ApiOperation(value="선택한 일기를 삭제", notes = "세부 설명")
-  @DeleteMapping("/delete/diary/{diary_id}" )
-  void deleteDiary(@RequestParam @DateTimeFormat(iso = ISO.DATE)@ApiParam(value="날짜 형식 : yyyy-MM-dd", example="2023-10-23") LocalDate date) {
-    diaryService.deleteDiary(date);
+  @DeleteMapping("/delete/diary")
+  void deleteDiary(@RequestParam Long id) {
+    diaryService.deleteDiary(id);
   }
 
 }

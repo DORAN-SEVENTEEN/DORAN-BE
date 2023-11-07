@@ -1,8 +1,8 @@
 package com.seventeen.doran.service;
 
 import com.seventeen.doran.dto.ContentsDto;
-import com.seventeen.doran.dto.ContentsResultDto;
 import com.seventeen.doran.dto.DiaryUpdateDto;
+import com.seventeen.doran.dto.ResultDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.repository.DiaryRepository;
 
@@ -37,10 +37,10 @@ public class DiaryService {
   }
 
   //기존 아이콘에 일기 + 결과 추가
-  public void updateContentsResult(@PathVariable Long id, @RequestBody ContentsResultDto contentsResultDto) {
+  public void updateResult(@PathVariable Long id, @RequestBody ResultDto ResultDto) {
     Optional<Diary> diary = diaryRepository.findById(id);
     if(diary.isPresent()) {
-      diary.get().setResultUrl(contentsResultDto.getResultUrl());
+      diary.get().setResultUrl(ResultDto.getResult());
       diaryRepository.save(diary.get());
     }
   }

@@ -1,8 +1,8 @@
 package com.seventeen.doran.controller;
 
 import com.seventeen.doran.dto.ContentsDto;
-import com.seventeen.doran.dto.ContentsResultDto;
 import com.seventeen.doran.dto.DiaryUpdateDto;
+import com.seventeen.doran.dto.ResultDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.service.DiaryService;
 import io.swagger.annotations.ApiOperation;
@@ -36,17 +36,17 @@ public class DiaryController {
   }
 
   @ApiOperation(value="해당 id에 일기 추가", notes = "세부 설명")
-  @PutMapping("/update/diary3/{id}")
+  @PutMapping("/update/contents/{id}")
   void updateContents(@PathVariable Long id, @RequestBody ContentsDto contentsDto) {
 
     diaryService.updateContents(id, contentsDto);
   }
 
-  @ApiOperation(value="해당 id에 일기 + 결과 추가", notes = "세부 설명")
-  @PutMapping("/update/diary2/{id}")
-  void updateContentsResult(@PathVariable Long id, @RequestBody ContentsResultDto contentsResultDto) {
+  @ApiOperation(value="해당 id에 결과 추가", notes = "세부 설명")
+  @PutMapping("/update/result/{id}")
+  void updateResult(@PathVariable Long id, @RequestBody ResultDto ResultDto) {
 
-    diaryService.updateContentsResult(id, contentsResultDto);
+    diaryService.updateResult(id, ResultDto);
   }
 
   @ApiOperation(value="선택한 날의 모든 일기 데이터를 가져옴", notes = "세부 설명")

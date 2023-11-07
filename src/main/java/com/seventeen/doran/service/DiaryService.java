@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import java.util.Optional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +24,14 @@ public class DiaryService {
   public void createDiary(LocalDateTime date, String text, String iconUrl) {
   }
 
+  @Transactional
   public List<Diary> readDiariesDay(LocalDateTime date) {
-
-    return null;
+    return diaryRepository.findAllByDate(date);
   }
-
+  @Transactional
   public List<Diary> readDiariesMonth(LocalDateTime startDate, LocalDateTime endDate) {
-
-    return null;
+    return diaryRepository.findAllByDateBetween(startDate, endDate);
   }
-
 
 
   public void updateDiary(@PathVariable Long id, @RequestBody DiaryDto diaryDto) {

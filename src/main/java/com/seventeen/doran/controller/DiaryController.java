@@ -36,14 +36,14 @@ public class DiaryController {
   }
 
   @ApiOperation(value="해당 id에 일기 추가", notes = "세부 설명")
-  @PutMapping("/update/diary/{id}")
+  @PutMapping("/update/diary3/{id}")
   void updateContents(@PathVariable Long id, @RequestBody ContentsDto contentsDto) {
 
     diaryService.updateContents(id, contentsDto);
   }
 
   @ApiOperation(value="해당 id에 일기 + 결과 추가", notes = "세부 설명")
-  @PutMapping("/update/diary/{id}")
+  @PutMapping("/update/diary2/{id}")
   void updateContentsResult(@PathVariable Long id, @RequestBody ContentsResultDto contentsResultDto) {
 
     diaryService.updateContentsResult(id, contentsResultDto);
@@ -64,9 +64,9 @@ public class DiaryController {
 
   @ApiOperation(value="선택한 일기의 내용을 변경", notes = "세부 설명")
   @PutMapping("/update/diary/{id}")
-  void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryDto) {
+  void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryUpdateDto) {
 
-    diaryService.updateDiary(id, diaryDto);
+    diaryService.updateDiary(id, diaryUpdateDto);
   }
 
   @ApiOperation(value="선택한 일기를 삭제", notes = "세부 설명")

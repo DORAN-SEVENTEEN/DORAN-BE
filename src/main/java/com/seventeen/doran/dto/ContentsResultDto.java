@@ -6,20 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class ContentsResultDto {
 
-    private String contents;
     private String resultUrl;
 
-    @Builder
-    public Diary toEntity() {
-        return Diary.builder()
-                .contents(contents)
-                .resultUrl(resultUrl)
-                .build();
-    }
 }

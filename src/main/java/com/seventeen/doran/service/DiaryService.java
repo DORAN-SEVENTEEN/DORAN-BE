@@ -40,7 +40,7 @@ public class DiaryService {
   public void updateContentsResult(@PathVariable Long id, @RequestBody ContentsResultDto contentsResultDto) {
     Optional<Diary> diary = diaryRepository.findById(id);
     if(diary.isPresent()) {
-      diary.get().setContents(contentsResultDto.getContents());
+      diary.get().setResultUrl(contentsResultDto.getResultUrl());
       diaryRepository.save(diary.get());
     }
   }

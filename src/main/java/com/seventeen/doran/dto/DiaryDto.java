@@ -12,14 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class DiaryDto {
 
-  private Long id;
-
   private LocalDateTime date;
 
   private String iconUrl;
 
   private String contents;
-
-  private String resultUrl;
 
 }

@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 
 @Repository
-public interface DiaryRepository extends JpaRepository<Diary, Integer>{
+public interface DiaryRepository extends JpaRepository<Diary, Long>{
 
   //일기 id 값으로 (해당 일자 클릭) 내용 찾기 - update, get 사용
   Optional<Diary> findById(Long id);

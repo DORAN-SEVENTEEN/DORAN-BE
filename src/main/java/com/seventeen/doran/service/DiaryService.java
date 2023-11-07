@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RequiredArgsConstructor
@@ -33,12 +35,19 @@ public class DiaryService {
 
 
 
-  public void updateDiary(Long id) {
+  public void updateDiary(@PathVariable Long id, @RequestBody DiaryDto diaryDto) {
+
+    Optional<Diary> diary = diaryRepository.findById(id);
+    if(diary.isPresent()) {
+      diary.get().setDate(diaryDto.getDate());
+      diary.get().setContents(diaryDto.getContents());
+      diary.get().setIconUrl(diaryDto.getIconUrl());
+      diaryRepository.save(diary.get());
+    }
+  }
+  public void deleteDiary(Long id) {
+
+    diaryRepository.deleteById(id);
 
   }
-
-  public void deleteDiary(LocalDate date) {
-  }
-
-
 }

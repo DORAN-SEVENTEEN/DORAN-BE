@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,5 +28,11 @@ public class Diary {
 
   private String resultUrl;
 
-
+  @Builder
+  public Diary (LocalDateTime date, String iconUrl, String contents, String resultUrl) {
+    this.date = date;
+    this.iconUrl = iconUrl;
+    this.contents = contents;
+    this.resultUrl = resultUrl;
+  }
 }

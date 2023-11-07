@@ -1,11 +1,13 @@
 package com.seventeen.doran.controller;
 
-import com.seventeen.doran.dto.DiaryDto;
+import com.seventeen.doran.dto.ContentsDto;
+import com.seventeen.doran.dto.ContentsResultDto;
+import com.seventeen.doran.dto.DiaryUpdateDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.service.DiaryService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +29,24 @@ public class DiaryController {
   private final DiaryService diaryService;
 
 
-  @ApiOperation(value="DB에 일기 저장", notes = "세부 설명")
-  @PostMapping("/create/diary")
-  void createDiary(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @ApiParam(value="날짜 형식 : yyyy-MM-dd", example="2023-10-23") LocalDateTime date,
-      @RequestBody String contents, String icon_Url) {
-    diaryService.createDiary(date, contents, icon_Url);
+  @ApiOperation(value="DB에 아이콘 저장하면서 id 생성", notes = "세부 설명")
+  @PostMapping("/create/icon")
+  void createIcon(@RequestBody DiaryUpdateDto diaryUpdateDto) {
+    diaryService.createIcon(diaryUpdateDto);
+  }
+
+  @ApiOperation(value="해당 id에 일기 추가", notes = "세부 설명")
+  @PutMapping("/update/diary/{id}")
+  void updateContents(@PathVariable Long id, @RequestBody ContentsDto contentsDto) {
+
+    diaryService.updateContents(id, contentsDto);
+  }
+
+  @ApiOperation(value="해당 id에 일기 + 결과 추가", notes = "세부 설명")
+  @PutMapping("/update/diary/{id}")
+  void updateContentsResult(@PathVariable Long id, @RequestBody ContentsResultDto contentsResultDto) {
+
+    diaryService.updateContentsResult(id, contentsResultDto);
   }
 
   @ApiOperation(value="선택한 날의 모든 일기 데이터를 가져옴", notes = "세부 설명")
@@ -49,7 +64,7 @@ public class DiaryController {
 
   @ApiOperation(value="선택한 일기의 내용을 변경", notes = "세부 설명")
   @PutMapping("/update/diary/{id}")
-  void updateDiary(@PathVariable Long id, @RequestBody DiaryDto diaryDto) {
+  void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryDto) {
 
     diaryService.updateDiary(id, diaryDto);
   }

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +24,14 @@ public class DiaryService {
 
   private final DiaryRepository diaryRepository;
 
-  public void createIcon(DiaryUpdateDto diaryUpdateDto) {
+  public long createIcon(DiaryUpdateDto diaryUpdateDto) {
     Diary diary = diaryRepository.save(diaryUpdateDto.toEntity());
+    return diary.getId();
   }
 
   //기존 아이콘에 일기 추가
-  public void updateContents(@PathVariable Long id, @RequestBody ContentsDto contentsDto) {
-    Optional<Diary> diary = diaryRepository.findById(id);
+  public void updateContents(@RequestBody ContentsDto contentsDto) {
+    Optional<Diary> diary = diaryRepository.findById(contentsDto.getId());
     if(diary.isPresent()) {
       diary.get().setContents(contentsDto.getContents());
       diaryRepository.save(diary.get());
@@ -37,10 +39,10 @@ public class DiaryService {
   }
 
   //기존 아이콘에 일기 + 결과 추가
-  public void updateResult(@PathVariable Long id, @RequestBody ResultDto ResultDto) {
-    Optional<Diary> diary = diaryRepository.findById(id);
+  public void updateResult(@RequestBody ResultDto resultDto) {
+    Optional<Diary> diary = diaryRepository.findById(resultDto.getId());
     if(diary.isPresent()) {
-      diary.get().setResultUrl(ResultDto.getResult());
+      diary.get().setResultUrl(resultDto.getResult());
       diaryRepository.save(diary.get());
     }
   }

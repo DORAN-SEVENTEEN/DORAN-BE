@@ -10,5 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContentsDto {
+    private long id;
     private String contents;
+
+    public long getId() {
+        return id;
+    }
 }

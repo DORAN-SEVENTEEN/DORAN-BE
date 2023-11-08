@@ -36,4 +36,8 @@ public class Diary {
     this.contents = contents;
     this.resultUrl = resultUrl;
   }
+
+  public long getId() {
+    return id;
+  }
 }

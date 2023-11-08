@@ -14,14 +14,8 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,25 +23,26 @@ public class DiaryController {
 
   private final DiaryService diaryService;
 
-
   @ApiOperation(value="DB에 아이콘 저장하면서 id 생성")
   @PostMapping("/create/icon")
-  void createIcon(@RequestBody DiaryUpdateDto diaryUpdateDto) {
-    diaryService.createIcon(diaryUpdateDto);
+  long createIcon(@RequestBody DiaryUpdateDto diaryUpdateDto) {
+    long diaryId = diaryService.createIcon(diaryUpdateDto);
+    return diaryId;
   }
 
+  @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value="해당 id에 일기 추가")
-  @PutMapping("/update/contents/{id}")
-  void updateContents(@PathVariable Long id, @RequestBody ContentsDto contentsDto) {
-
-    diaryService.updateContents(id, contentsDto);
+  @PutMapping("/update/contents")
+  void updateContents(@RequestBody ContentsDto contentsDto) {
+    diaryService.updateContents(contentsDto);
   }
 
+  @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value="해당 id에 결과 추가")
-  @PutMapping("/update/result/{id}")
-  void updateResult(@PathVariable Long id, @RequestBody ResultDto ResultDto) {
+  @PutMapping("/update/result")
+  void updateResult(@RequestBody ResultDto ResultDto) {
 
-    diaryService.updateResult(id, ResultDto);
+    diaryService.updateResult(ResultDto);
   }
 
   @ApiOperation(value="선택한 id에 따른 일기 내용을 가져옴")

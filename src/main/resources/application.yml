@@ -6,9 +6,9 @@ spring:
 #    password: test1234
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${secrets.ENDPOINT}:${secrets.PORTNUMBER}/${secrets.INITIALDB}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: ${secrets.MYSQL_USERNAME}
-    password: ${secrets.MYSQL_PASSWORD}
+    url: jdbc:mysql://dorandb-mysql.cfiiptxn0fhq.ap-northeast-2.rds.amazonaws.com:3306/doran?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: admin
+    password: qwer1234
 
   jpa:
     open-in-view: false

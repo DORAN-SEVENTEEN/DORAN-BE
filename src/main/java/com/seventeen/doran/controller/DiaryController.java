@@ -59,20 +59,11 @@ public class DiaryController {
     return diaryService.readDiariesDay(date);
   }
 
-  @ApiOperation(value="선택한 달의 모든 일기 데이터를 가져옴")
-  @GetMapping("/read/diaries-month")
-  List<Diary> readDiariesMonth(@RequestParam @DateTimeFormat(iso = ISO.DATE) @ApiParam(value="날짜 형식 : yyyy-MM-dd", example="2023-10-01") LocalDate startDate,
-                              @RequestParam @DateTimeFormat(iso = ISO.DATE) @ApiParam(value="날짜 형식 : yyyy-MM-dd", example="2023-10-30") LocalDate endDate) {
+  @ApiOperation(value="모든 일기 데이터를 가져옴")
+  @GetMapping("/read/diaries")
+  List<Diary> readDiaries() {
 
-    return diaryService.readDiariesMonth(startDate, endDate);
-
-  }
-
-  @ApiOperation(value="선택한 일기의 내용을 변경")
-  @PutMapping("/update/diary/{id}")
-  void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryUpdateDto) {
-
-    diaryService.updateDiary(id, diaryUpdateDto);
+    return diaryService.readDiaries();
   }
 
   @ApiOperation(value="선택한 일기를 삭제")

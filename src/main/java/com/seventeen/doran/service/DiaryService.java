@@ -61,23 +61,11 @@ public class DiaryService {
     return diaryRepository.findAllByDate(date);
   }
 
-  //기간(월)에 따른 일기 내용 읽기
+  //저장한 모든 일기 내용 읽기
   @Transactional(readOnly = true)
-  public List<Diary> readDiariesMonth(LocalDate startDate, LocalDate endDate) {
+  public List<Diary> readDiaries() {
 
-    return diaryRepository.findAllByDateBetween(startDate, endDate);
-  }
-
-  // 일기 수정하기
-  public void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryDto) {
-
-    Optional<Diary> diary = diaryRepository.findById(id);
-    if(diary.isPresent()) {
-      diary.get().setDate(diaryDto.getDate());
-      diary.get().setContents(diaryDto.getContents());
-      diary.get().setIconUrl(diaryDto.getIconUrl());
-      diaryRepository.save(diary.get());
-    }
+    return diaryRepository.findAll();
   }
 
   // 일기 삭제하기

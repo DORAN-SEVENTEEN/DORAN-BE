@@ -18,9 +18,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long>{
   //날짜 값으로 (해당 일자 클릭) 내용 조회하기 -> get 사용
   List<Diary> findAllByDate(LocalDate date);
 
-  List<Diary> findAllByDateBetween(LocalDate startDate, LocalDate endDate);
-
-
   //일기 id 값으로 (해당 일자 클릭) 내용 삭제하기 - delete 사용
   @Transactional
   void deleteById(Long id);

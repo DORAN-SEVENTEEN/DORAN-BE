@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: ${url}
-    driver-class-name: ${driverClassName}
-    username: ${username}
-    password: ${password}
+    url: jdbc:mariadb://svc.sel5.cloudtype.app:32067/dorandb?characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: qwer1234
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://dorandb-mysql.cfiiptxn0fhq.ap-northeast-2.rds.amazonaws.com:3306/doran?serverTimezone=Asia/Seoul&characterEncoding=UTF-8

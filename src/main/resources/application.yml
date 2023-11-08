@@ -5,10 +5,10 @@ spring:
 #    username: test_user
 #    password: test1234
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://${DB_url}:${DB_port}/${DB_dataBaseName}
-    username: ${DB_name}
-    password: ${DB_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${secrets.ENDPOINT}:${secrets.PORTNUMBER}/${secrets.INITIALDB}?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${secrets.MYSQL_USERNAME}
+    password: ${secrets.MYSQL_PASSWORD}
 
   jpa:
     open-in-view: false

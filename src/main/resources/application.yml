@@ -6,9 +6,9 @@ spring:
 #    password: test1234
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://svc.sel5.cloudtype.app:32067/dorandb?characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: qwer1234
+    url: jdbc:mariadb://${DB_url}:${DB_port}/{DB_dataBaseName}?characterEncoding=UTF-8&serverTimezone=UTC
+    username: ${DB_name}
+    password: ${DB_password}
 
   jpa:
     open-in-view: false

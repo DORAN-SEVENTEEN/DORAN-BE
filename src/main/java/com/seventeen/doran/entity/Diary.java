@@ -1,5 +1,6 @@
 package com.seventeen.doran.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Diary {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private LocalDateTime date;
+  private LocalDate date;
 
   private String iconUrl;
 
@@ -29,7 +30,7 @@ public class Diary {
   private String resultUrl;
 
   @Builder
-  public Diary (LocalDateTime date, String iconUrl, String contents, String resultUrl) {
+  public Diary (LocalDate date, String iconUrl, String contents, String resultUrl) {
     this.date = date;
     this.iconUrl = iconUrl;
     this.contents = contents;

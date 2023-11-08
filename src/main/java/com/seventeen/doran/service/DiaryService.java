@@ -6,13 +6,13 @@ import com.seventeen.doran.dto.ResultDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.repository.DiaryRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import java.util.Optional;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -45,7 +45,28 @@ public class DiaryService {
     }
   }
 
+  //인덱스에 따른 일기 내용 읽기
+  @Transactional(readOnly = true)
+  public Optional<Diary> readDiary(Long id) {
 
+    return diaryRepository.findById(id);
+  }
+
+  //날짜에 따른 일기 내용 읽기
+  @Transactional(readOnly = true)
+  public List<Diary> readDiariesDay(LocalDate date) {
+
+    return diaryRepository.findAllByDate(date);
+  }
+
+  //기간(월)에 따른 일기 내용 읽기
+  @Transactional(readOnly = true)
+  public List<Diary> readDiariesMonth(LocalDate startDate, LocalDate endDate) {
+
+    return diaryRepository.findAllByDateBetween(startDate, endDate);
+  }
+
+  // 일기 수정하기
   public void updateDiary(@PathVariable Long id, @RequestBody DiaryUpdateDto diaryDto) {
 
     Optional<Diary> diary = diaryRepository.findById(id);
@@ -57,17 +78,9 @@ public class DiaryService {
     }
   }
 
-  @Transactional
-  public List<Diary> readDiariesDay(LocalDateTime date) {
-    return diaryRepository.findAllByDate(date);
-  }
-  @Transactional
-  public List<Diary> readDiariesMonth(LocalDateTime startDate, LocalDateTime endDate) {
-    return diaryRepository.findAllByDateBetween(startDate, endDate);
-  }
+  // 일기 삭제하기
   public void deleteDiary(Long id) {
 
     diaryRepository.deleteById(id);
-
   }
 }

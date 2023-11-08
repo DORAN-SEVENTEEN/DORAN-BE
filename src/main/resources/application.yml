@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/doran?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: 1dlrkdms!
+    url: jdbc:mariadb://localhost:3306/test
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: test_user
+    password: test1234
 
   jpa:
     open-in-view: false

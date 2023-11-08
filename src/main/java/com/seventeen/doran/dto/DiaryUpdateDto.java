@@ -1,5 +1,6 @@
 package com.seventeen.doran.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.seventeen.doran.entity.Diary;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class DiaryUpdateDto {
 
-  private LocalDateTime date;
+  private LocalDate date;
   private String iconUrl;
   private String contents;
 

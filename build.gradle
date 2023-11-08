@@ -8,7 +8,7 @@ group = 'com.seventeen'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '1.8'
+    sourceCompatibility = "1.9"
 }
 
 configurations {
@@ -31,8 +31,10 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+targetCompatibility = JavaVersion.VERSION_1_9

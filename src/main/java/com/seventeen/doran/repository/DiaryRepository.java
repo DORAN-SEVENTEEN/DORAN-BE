@@ -2,6 +2,7 @@ package com.seventeen.doran.repository;
 
 import com.seventeen.doran.entity.Diary;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,11 +12,11 @@ import javax.transaction.Transactional;
 
 
 @Repository
-public interface DiaryRepository extends JpaRepository<Diary, Integer>{
+public interface DiaryRepository extends JpaRepository<Diary, Long>{
 
-  //일기 id 값으로 (해당 일자 클릭) 내용 찾기 - update, get 사용
-  Optional<Diary> findById(Long id);
 
+  //날짜 값으로 (해당 일자 클릭) 내용 조회하기 -> get 사용
+  List<Diary> findAllByDate(LocalDate date);
 
   //일기 id 값으로 (해당 일자 클릭) 내용 삭제하기 - delete 사용
   @Transactional

@@ -22,4 +22,4 @@ spring:
       matching-strategy: "ant_path_matcher"
 
 server:
-  port: 3306
+  port: 8081

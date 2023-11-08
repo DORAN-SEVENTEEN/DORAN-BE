@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3306/test
+    url: jdbc:mariadb://svc.sel5.cloudtype.app:30745/test
     driver-class-name: org.mariadb.jdbc.Driver
     username: test_user
     password: test1234

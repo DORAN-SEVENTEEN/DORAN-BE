@@ -2,10 +2,8 @@ package com.seventeen.doran.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,15 +16,16 @@ import lombok.NoArgsConstructor;
 public class Diary {
 
   @Id
+  @Column
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-
+  @Column
   private LocalDate date;
-
+  @Column
   private String iconUrl;
-
+  @Column
   private String contents;
-
+  @Column(length = 65535)
   private String resultUrl;
 
   @Builder

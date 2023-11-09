@@ -23,6 +23,7 @@ public class DiaryController {
 
   private final DiaryService diaryService;
 
+  @CrossOrigin
   @ApiOperation(value="DB에 아이콘 저장하면서 id 생성")
   @PostMapping("/create/icon")
   long createIcon(@RequestBody DiaryUpdateDto diaryUpdateDto) {

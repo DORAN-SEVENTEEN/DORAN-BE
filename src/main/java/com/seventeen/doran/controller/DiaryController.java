@@ -31,6 +31,7 @@ public class DiaryController {
     return diaryId;
   }
 
+  @CrossOrigin
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value="해당 id에 일기 추가")
   @PutMapping("/update/contents")
@@ -38,6 +39,7 @@ public class DiaryController {
     diaryService.updateContents(contentsDto);
   }
 
+  @CrossOrigin
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value="해당 id에 결과 추가")
   @PutMapping("/update/result")
@@ -46,6 +48,7 @@ public class DiaryController {
     diaryService.updateResult(ResultDto);
   }
 
+  @CrossOrigin
   @ApiOperation(value="선택한 id에 따른 일기 내용을 가져옴")
   @GetMapping("/read/diary/{id}")
   Optional<Diary> readDiary(@PathVariable Long id) {
@@ -53,6 +56,7 @@ public class DiaryController {
     return diaryService.readDiary(id);
   }
 
+  @CrossOrigin
   @ApiOperation(value="선택한 날의 모든 일기 데이터를 가져옴")
   @GetMapping("/read/diaries-day")
   List<Diary> readDiariesDay(@RequestParam @DateTimeFormat(iso = ISO.DATE) @ApiParam(value="날짜 형식 : yyyy-MM-dd", example="2023-10-23") LocalDate date) {
@@ -60,6 +64,7 @@ public class DiaryController {
     return diaryService.readDiariesDay(date);
   }
 
+  @CrossOrigin
   @ApiOperation(value="모든 일기 데이터를 가져옴")
   @GetMapping("/read/diaries")
   List<Diary> readDiaries() {
@@ -67,6 +72,7 @@ public class DiaryController {
     return diaryService.readDiaries();
   }
 
+  @CrossOrigin
   @ApiOperation(value="선택한 일기를 삭제")
   @DeleteMapping("/delete/diary")
   void deleteDiary(@RequestParam Long id) {

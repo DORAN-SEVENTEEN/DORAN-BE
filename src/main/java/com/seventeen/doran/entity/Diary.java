@@ -25,8 +25,8 @@ public class Diary {
   private LocalDate date;
   private String iconUrl;
   private String contents;
-//  @JsonIgnore
-//  @OneToOne(mappedBy = "diary")
+  @JsonIgnore
+  @OneToOne(mappedBy = "diary")
   private Image resultUrl;
 
   @Builder

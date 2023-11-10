@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.16'
+    id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -31,10 +31,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
-    runtimeOnly 'com.h2database:h2'
-    implementation 'commons-io:commons-io:2.11.0'    /* Apache commons-io */
-    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
 
 }
 

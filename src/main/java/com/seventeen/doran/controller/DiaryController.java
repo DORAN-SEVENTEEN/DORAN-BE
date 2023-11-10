@@ -2,6 +2,7 @@ package com.seventeen.doran.controller;
 
 import com.seventeen.doran.dto.ContentsDto;
 import com.seventeen.doran.dto.DiaryUpdateDto;
+import com.seventeen.doran.dto.ResultDto;
 import com.seventeen.doran.entity.Diary;
 import com.seventeen.doran.entity.Image;
 import com.seventeen.doran.repository.DiaryRepository;
@@ -52,13 +53,13 @@ public class DiaryController {
     diaryService.updateContents(contentsDto);
   }
 
-  //  @CrossOrigin
-//  @ResponseStatus(HttpStatus.OK)
-//  @ApiOperation(value="해당 id에 결과 추가")
-//  @PutMapping("/update/result")
-//  void updateResult(@RequestBody ResultDto ResultDto) {
-//    diaryService.updateResult(ResultDto);
-//  }
+  @CrossOrigin
+  @ResponseStatus(HttpStatus.OK)
+  @ApiOperation(value="해당 id에 결과 추가")
+  @PutMapping("/update/result")
+  void updateResult(@RequestBody ResultDto resultDto) {
+    diaryService.updateResult(resultDto);
+  }
 //  @CrossOrigin
 //  @PostMapping("/update/result/{id}")
 //  public String postImage(@PathVariable Long id, @RequestPart("image") MultipartFile image, Model model)
@@ -92,13 +93,13 @@ public class DiaryController {
 //    return new String(Base64.encodeBase64(baos.toByteArray(), true));
 //  }
 
-  @CrossOrigin("*")
-  @PostMapping("/update/result/{id}")
-  public String uploafFile(@PathVariable Long id, @RequestParam("image") MultipartFile image) throws IOException {
-    Diary diary = diaryRepository.findById(id).get();
-    imageService.saveImage(diary, image);
-    return "redirect:/";
-  }
+//  @CrossOrigin("*")
+//  @PostMapping("/update/result/{id}")
+//  public String uploafFile(@PathVariable Long id, @RequestParam("image") MultipartFile image) throws IOException {
+//    Diary diary = diaryRepository.findById(id).get();
+//    imageService.saveImage(diary, image);
+//    return "redirect:/";
+//  }
 
   @CrossOrigin("*")
   @ApiOperation(value="선택한 id에 따른 일기 내용을 가져옴")

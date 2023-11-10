@@ -25,12 +25,12 @@ public class Diary {
   private LocalDate date;
   private String iconUrl;
   private String contents;
-  @JsonIgnore
-  @OneToOne(mappedBy = "diary")
-  private Image resultUrl;
+//  @JsonIgnore
+//  @OneToOne(mappedBy = "diary")
+  private String resultUrl;
 
   @Builder
-  public Diary (LocalDate date, String iconUrl, String contents, Image resultUrl) {
+  public Diary (LocalDate date, String iconUrl, String contents, String resultUrl) {
     this.date = date;
     this.iconUrl = iconUrl;
     this.contents = contents;

@@ -27,10 +27,10 @@ public class Diary {
   private String contents;
 //  @JsonIgnore
 //  @OneToOne(mappedBy = "diary")
-  private String resultUrl;
+  private Image resultUrl;
 
   @Builder
-  public Diary (LocalDate date, String iconUrl, String contents, String resultUrl) {
+  public Diary (LocalDate date, String iconUrl, String contents, Image resultUrl) {
     this.date = date;
     this.iconUrl = iconUrl;
     this.contents = contents;

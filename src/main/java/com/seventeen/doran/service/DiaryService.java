@@ -41,14 +41,14 @@ public class DiaryService {
   }
 
   //기존 아이콘에 결과 추가
-  @Transactional
-  public void updateResult(@RequestBody ResultDto resultDto) {
-    Optional<Diary> diary = diaryRepository.findById(resultDto.getId());
-    if(diary.isPresent()) {
-      diary.get().setResultUrl(resultDto.getResultUrl());
-      diaryRepository.save(diary.get());
-    }
-  }
+//  @Transactional
+//  public void updateResult(@RequestBody ResultDto resultDto) {
+//    Optional<Diary> diary = diaryRepository.findById(resultDto.getId());
+//    if(diary.isPresent()) {
+//      diary.get().setResultUrl(resultDto.getResultUrl());
+//      diaryRepository.save(diary.get());
+//    }
+//  }
 
   //인덱스에 따른 일기 내용 읽기
   @Transactional(readOnly = true)

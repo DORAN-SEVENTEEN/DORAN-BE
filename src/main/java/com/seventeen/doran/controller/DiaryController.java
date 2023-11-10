@@ -25,6 +25,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+
 @RequiredArgsConstructor
 @RestController
 public class DiaryController {
@@ -34,7 +36,7 @@ public class DiaryController {
   private final DiaryRepository diaryRepository;
   private final ImageService imageService;
 
-  @CrossOrigin
+  @CrossOrigin("*")
   @ApiOperation(value="DB에 아이콘 저장하면서 id 생성")
   @PostMapping("/create/icon")
   long createIcon(@RequestBody DiaryUpdateDto diaryUpdateDto) {
@@ -42,7 +44,7 @@ public class DiaryController {
     return diaryId;
   }
 
-  @CrossOrigin
+  @CrossOrigin("*")
   @ResponseStatus(HttpStatus.OK)
   @ApiOperation(value="해당 id에 일기 추가")
   @PutMapping("/update/contents")
@@ -90,6 +92,7 @@ public class DiaryController {
 //    return new String(Base64.encodeBase64(baos.toByteArray(), true));
 //  }
 
+  @CrossOrigin("*")
   @PostMapping("/update/result/{id}")
   public String uploafFile(@PathVariable Long id, @RequestParam("image") MultipartFile image) throws IOException {
     Diary diary = diaryRepository.findById(id).get();
@@ -97,7 +100,7 @@ public class DiaryController {
     return "redirect:/";
   }
 
-  @CrossOrigin
+  @CrossOrigin("*")
   @ApiOperation(value="선택한 id에 따른 일기 내용을 가져옴")
   @GetMapping("/read/diary/{id}")
   Optional<Diary> readDiary(@PathVariable Long id) {
@@ -109,19 +112,17 @@ public class DiaryController {
   @ApiOperation(value="선택한 날의 모든 일기 데이터를 가져옴")
   @GetMapping("/read/diaries-day")
   List<Diary> readDiariesDay(@RequestParam @DateTimeFormat(iso = ISO.DATE) @ApiParam(value="날짜 형식 : yyyy-MM-dd", example="2023-10-23") LocalDate date) {
-
     return diaryService.readDiariesDay(date);
   }
 
-  @CrossOrigin
+  @CrossOrigin("*")
   @ApiOperation(value="모든 일기 데이터를 가져옴")
   @GetMapping("/read/diaries")
   List<Diary> readDiaries() {
-
     return diaryService.readDiaries();
   }
 
-  @CrossOrigin
+  @CrossOrigin("*")
   @ApiOperation(value="선택한 일기를 삭제")
   @DeleteMapping("/delete/diary")
   void deleteDiary(@RequestParam Long id) {

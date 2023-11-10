@@ -7,8 +7,11 @@ import com.seventeen.doran.entity.Image;
 import com.seventeen.doran.repository.DiaryRepository;
 import com.seventeen.doran.repository.ImageRepository;
 import com.seventeen.doran.service.DiaryService;
+import com.seventeen.doran.service.ImageService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +32,7 @@ public class DiaryController {
   private final DiaryService diaryService;
   private final ImageRepository imageRepository;
   private final DiaryRepository diaryRepository;
+  private final ImageService imageService;
 
   @CrossOrigin
   @ApiOperation(value="DB에 아이콘 저장하면서 id 생성")
@@ -53,31 +57,31 @@ public class DiaryController {
 //  void updateResult(@RequestBody ResultDto ResultDto) {
 //    diaryService.updateResult(ResultDto);
 //  }
-  @CrossOrigin
-  @PostMapping("/update/result/{id}")
-  public String postImage(@PathVariable Long id, @RequestPart("image") MultipartFile image, Model model)
-          throws Exception {
-    Diary diary = diaryRepository.findById(id).get();
-    Image imageEntity = new Image();
-    imageEntity.setDiary(diary);
-    imageEntity.setImageBinaryData(image);
-    imageRepository.save(imageEntity);
-//    model.addAttribute("imageBinary", "data:image/gif;base64," + image);
-    return "image";
-  }
-
-
-  @CrossOrigin
-  @GetMapping("image")
-  public ResponseEntity<?> getResultImage(@PathVariable Long id, Model model) {
-    Optional<Image> image = Optional.ofNullable(imageRepository.findByDiary_DiaryIdx(id));
-    if (image.isPresent()) {
-      model.addAttribute("imageBinary", "data:image/gif;base64," + image.get().getImageBinaryData());
-    }
-    return new ResponseEntity<>(image, HttpStatus.OK);
-  }
-
 //  @CrossOrigin
+//  @PostMapping("/update/result/{id}")
+//  public String postImage(@PathVariable Long id, @RequestPart("image") MultipartFile image, Model model)
+//          throws Exception {
+//    Diary diary = diaryRepository.findById(id).get();
+//    Image imageEntity = new Image();
+//    imageEntity.setDiary(diary);
+//    imageEntity.setImageBinaryData(image);
+//    imageRepository.save(imageEntity);
+////    model.addAttribute("imageBinary", "data:image/gif;base64," + image);
+//    return "image";
+//  }
+//
+//
+//  @CrossOrigin
+//  @GetMapping("image")
+//  public ResponseEntity<?> getResultImage(@PathVariable Long id, Model model) {
+//    Optional<Image> image = Optional.ofNullable(imageRepository.findByDiary_DiaryIdx(id));
+//    if (image.isPresent()) {
+//      model.addAttribute("imageBinary", "data:image/gif;base64," + image.get().getImageBinaryData());
+//    }
+//    return new ResponseEntity<>(image, HttpStatus.OK);
+//  }
+//
+////  @CrossOrigin
 //  public String convertBinary(MultipartFile files) throws Exception {
 //    String fileName = StringUtils.cleanPath(files.getOriginalFilename());
 //    BufferedImage image = ImageIO.read(files.getInputStream());
@@ -85,6 +89,13 @@ public class DiaryController {
 //    ImageIO.write(image, fileName.substring(fileName.lastIndexOf(".") + 1), baos);
 //    return new String(Base64.encodeBase64(baos.toByteArray(), true));
 //  }
+
+  @PostMapping("/update/result/{id}")
+  public String uploafFile(@PathVariable Long id, @RequestParam("image") MultipartFile image) throws IOException {
+    Diary diary = diaryRepository.findById(id).get();
+    imageService.saveImage(diary, image);
+    return "redirect:/";
+  }
 
 
   @CrossOrigin

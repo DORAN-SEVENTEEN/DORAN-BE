@@ -16,16 +16,12 @@ import lombok.NoArgsConstructor;
 public class Diary {
 
   @Id
-  @Column
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  @Column
   private LocalDate date;
-  @Column
   private String iconUrl;
-  @Column
   private String contents;
-  @Column(length = 65535)
+  @Lob
   private String resultUrl;
 
   @Builder

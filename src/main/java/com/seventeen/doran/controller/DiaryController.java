@@ -44,7 +44,6 @@ public class DiaryController {
   @ApiOperation(value="해당 id에 결과 추가")
   @PutMapping("/update/result")
   void updateResult(@RequestBody ResultDto ResultDto) {
-
     diaryService.updateResult(ResultDto);
   }
 

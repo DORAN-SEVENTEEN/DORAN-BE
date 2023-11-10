@@ -55,7 +55,7 @@ public class DiaryController {
 
   @CrossOrigin
   @PostMapping("/update/result/{id}")
-  public String postImage(@PathVariable Long id, @RequestPart("image") MultipartFile image, Model model)
+  public String postImage(@PathVariable Long id, @RequestPart(required = false) MultipartFile image, Model model)
           throws Exception {
     Diary diary = diaryRepository.findById(id).get();
     String imageBinary = convertBinary(image);

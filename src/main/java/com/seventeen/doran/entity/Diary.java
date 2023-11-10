@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.chrono.Chronology;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class Diary {
   private LocalDate date;
   private String iconUrl;
   private String contents;
+  @JsonIgnore
   @OneToOne(mappedBy = "diary")
   private Image resultUrl;
 

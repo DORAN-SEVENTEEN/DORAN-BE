@@ -9,25 +9,18 @@ import com.seventeen.doran.repository.ImageRepository;
 import com.seventeen.doran.service.DiaryService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
 
 @RequiredArgsConstructor
 @RestController
@@ -53,19 +46,26 @@ public class DiaryController {
     diaryService.updateContents(contentsDto);
   }
 
+  //  @CrossOrigin
+//  @ResponseStatus(HttpStatus.OK)
+//  @ApiOperation(value="해당 id에 결과 추가")
+//  @PutMapping("/update/result")
+//  void updateResult(@RequestBody ResultDto ResultDto) {
+//    diaryService.updateResult(ResultDto);
+//  }
   @CrossOrigin
   @PostMapping("/update/result/{id}")
-  public String postImage(@PathVariable Long id, @RequestPart(required = false) MultipartFile image, Model model)
+  public String postImage(@PathVariable Long id, @RequestPart("image") MultipartFile image, Model model)
           throws Exception {
     Diary diary = diaryRepository.findById(id).get();
-    String imageBinary = convertBinary(image);
     Image imageEntity = new Image();
     imageEntity.setDiary(diary);
-    imageEntity.setImageBinaryData(imageBinary);
+    imageEntity.setImageBinaryData(image);
     imageRepository.save(imageEntity);
-    model.addAttribute("imageBinary", "data:image/gif;base64," + imageBinary);
+//    model.addAttribute("imageBinary", "data:image/gif;base64," + image);
     return "image";
   }
+
 
   @CrossOrigin
   @GetMapping("image")
@@ -77,14 +77,15 @@ public class DiaryController {
     return new ResponseEntity<>(image, HttpStatus.OK);
   }
 
-  @CrossOrigin
-  public String convertBinary(MultipartFile files) throws Exception {
-    String fileName = StringUtils.cleanPath(files.getOriginalFilename());
-    BufferedImage image = ImageIO.read(files.getInputStream());
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    ImageIO.write(image, fileName.substring(fileName.lastIndexOf(".") + 1), baos);
-    return new String(Base64.encodeBase64(baos.toByteArray(), true));
-  }
+//  @CrossOrigin
+//  public String convertBinary(MultipartFile files) throws Exception {
+//    String fileName = StringUtils.cleanPath(files.getOriginalFilename());
+//    BufferedImage image = ImageIO.read(files.getInputStream());
+//    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//    ImageIO.write(image, fileName.substring(fileName.lastIndexOf(".") + 1), baos);
+//    return new String(Base64.encodeBase64(baos.toByteArray(), true));
+//  }
+
 
   @CrossOrigin
   @ApiOperation(value="선택한 id에 따른 일기 내용을 가져옴")

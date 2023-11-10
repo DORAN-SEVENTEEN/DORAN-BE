@@ -3,6 +3,8 @@ package com.seventeen.doran.repository;
 import com.seventeen.doran.entity.Diary;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +22,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long>{
   @Transactional
   void deleteById(Long id);
 
+  @Transactional
+  Optional<Diary> findById(Long id);
 }

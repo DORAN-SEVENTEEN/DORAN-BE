@@ -21,9 +21,9 @@ public class ImageService {
         }
 
         String origName = image.getOriginalFilename();
-        String uuid = UUID.randomUUID().toString();
+//        String uuid = UUID.randomUUID().toString();
         String extension = origName.substring(origName.lastIndexOf("."));
-        String savedName = uuid + extension;
+        String savedName = origName + extension;
 
         Image imageEntity = Image.builder()
                 .diary(diary)

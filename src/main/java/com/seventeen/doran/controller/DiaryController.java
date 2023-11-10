@@ -97,7 +97,6 @@ public class DiaryController {
     return "redirect:/";
   }
 
-
   @CrossOrigin
   @ApiOperation(value="선택한 id에 따른 일기 내용을 가져옴")
   @GetMapping("/read/diary/{id}")

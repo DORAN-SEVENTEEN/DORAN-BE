@@ -53,13 +53,6 @@ public class DiaryController {
     diaryService.updateContents(contentsDto);
   }
 
-//  @CrossOrigin
-//  @ResponseStatus(HttpStatus.OK)
-//  @ApiOperation(value="해당 id에 결과 추가")
-//  @PutMapping("/update/result")
-//  void updateResult(@RequestBody ResultDto ResultDto) {
-//    diaryService.updateResult(ResultDto);
-//  }
   @CrossOrigin
   @PostMapping("/update/result/{id}")
   public String postImage(@PathVariable Long id, @RequestPart("image") MultipartFile image, Model model)

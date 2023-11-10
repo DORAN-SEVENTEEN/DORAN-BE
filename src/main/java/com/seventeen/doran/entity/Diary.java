@@ -19,7 +19,7 @@ public class Diary {
 
   @Id
   @Column(name = "idx")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private long diaryIdx;
   private LocalDate date;
   private String iconUrl;

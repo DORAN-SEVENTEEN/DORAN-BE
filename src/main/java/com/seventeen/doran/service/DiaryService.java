@@ -23,12 +23,14 @@ public class DiaryService {
 
   private final DiaryRepository diaryRepository;
 
+  @Transactional
   public long createIcon(DiaryUpdateDto diaryUpdateDto) {
     Diary diary = diaryRepository.save(diaryUpdateDto.toEntity());
     return diary.getId();
   }
 
   //기존 아이콘에 일기 추가
+  @Transactional
   public void updateContents(@RequestBody ContentsDto contentsDto) {
     Optional<Diary> diary = diaryRepository.findById(contentsDto.getId());
     if(diary.isPresent()) {
